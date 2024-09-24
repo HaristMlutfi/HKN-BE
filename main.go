@@ -34,7 +34,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	////generate models
+	//generate models
 	//g := gen.NewGenerator(
 	//	gen.Config{
 	//		OutPath: "gen_models", // Output directory for generated files

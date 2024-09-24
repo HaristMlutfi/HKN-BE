@@ -134,5 +134,5 @@ hkn-be
 .idea
 .vscode
 
-.model/*
-.gen_models/*
+/model/
+/gen_models/

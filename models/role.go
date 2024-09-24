@@ -1,0 +1,19 @@
+package models
+
+import (
+	"gorm.io/gorm"
+	"time"
+)
+
+const TableNameRole = "roles"
+
+// Role mapped from table <roles>
+type Role struct {
+	Id          string         `gorm:"column:id;primaryKey;default:uuid_generate_v4()" json:"id"`
+	Code        string         `gorm:"column:code;not null" json:"code"`
+	Name        string         `gorm:"column:name;not null" json:"name"`
+	Description string         `gorm:"column:description" json:"description"`
+	CreatedAt   time.Time      `gorm:"column:created_at;default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt   time.Time      `gorm:"column:updated_at" json:"updated_at"`
+	DeletedAt   gorm.DeletedAt `gorm:"column:deleted_at" json:"deleted_at"`
+}

@@ -8,6 +8,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/pressly/goose/v3"
 	"gopkg.in/validator.v2"
+	"gorm.io/gen"
 	"hkn-be/config"
 	"hkn-be/handlers"
 	"hkn-be/infras/db"
@@ -34,18 +35,18 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	////generate models
-	//g := gen.NewGenerator(
-	//	gen.Config{
-	//		OutPath: "gen_models", // Output directory for generated files
-	//	},
-	//)
-	//g.UseDB(gormDb)
-	//
-	//// Generate structs from all tables of the current database
-	//g.ApplyBasic(g.GenerateAllTable()...)
-	//// Execute the code generation
-	//g.Execute()
+	//generate models
+	g := gen.NewGenerator(
+		gen.Config{
+			OutPath: "gen_models", // Output directory for generated files
+		},
+	)
+	g.UseDB(gormDb)
+
+	// Generate structs from all tables of the current database
+	g.ApplyBasic(g.GenerateAllTable()...)
+	// Execute the code generation
+	g.Execute()
 
 	//init redis
 	redisServer := redis.NewRedisServer(&cfg.Redis)

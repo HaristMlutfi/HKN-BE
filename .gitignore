@@ -129,6 +129,7 @@ go.work
 beresin-backend-binary
 /.idea/LMS-Backend.iml
 .env
+hkn-be
 
 .idea
 .vscode

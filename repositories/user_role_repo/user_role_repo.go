@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/labstack/gommon/log"
 	"gorm.io/gorm"
+	"hkn-be/constants"
 	"hkn-be/models"
 )
 
@@ -13,7 +14,7 @@ type userRoleRepo struct {
 
 func (u userRoleRepo) GetUserRoleListByUserId(ctx context.Context, userId string) (*[]models.UserRole, error) {
 	var result []models.UserRole
-	tx := u.DB.WithContext(ctx).Select(&result, "user_id = ?", userId)
+	tx := u.DB.WithContext(ctx).Table(models.TableNameUserRole).Find(&result, constants.QueryUserId, userId)
 	if tx.Error != nil {
 		log.Error(tx.Error)
 		return nil, tx.Error

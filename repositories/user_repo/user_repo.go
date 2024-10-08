@@ -14,7 +14,7 @@ type userRepo struct {
 
 func (u userRepo) GetUserById(ctx context.Context, userId string) (*models.User, error) {
 	var result models.User
-	tx := u.DB.WithContext(ctx).First(&result, constants.QueryById, userId)
+	tx := u.DB.WithContext(ctx).Table(models.TableNameUser).First(&result, constants.QueryById, userId)
 	if tx.Error != nil {
 		log.Error(tx.Error)
 		return nil, tx.Error

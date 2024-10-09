@@ -2,11 +2,12 @@ package config
 
 import (
 	"encoding/json"
-	"github.com/joho/godotenv"
 	"hkn-be/constants"
 	"log"
 	"os"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -73,10 +74,18 @@ func InitConfig() Config {
 	if err != nil {
 		log.Fatalf("Invalid Mailer Port Format, Err : %s", err.Error())
 	}
-	mailerMaxAttempt, err := strconv.Atoi(os.Getenv(constants.MailMaxAttempt))
+
+	mailerMaxAttemptStr := os.Getenv(constants.MailMaxAttempt)
+
+	if mailerMaxAttemptStr == "" {
+		mailerMaxAttemptStr = "3" // Set default value to 3
+	}
+
+	mailerMaxAttempt, err := strconv.Atoi(mailerMaxAttemptStr)
 	if err != nil {
 		log.Fatalf("Invalid Mailer Max Attempt Format, Err : %s", err.Error())
 	}
+
 	mailerUseTls, err := strconv.ParseBool(os.Getenv(constants.MailUseTls))
 	if err != nil {
 		log.Fatalf("Invalid Mailer Use TLS Format, Err : %s", err.Error())

@@ -2,10 +2,11 @@ package user_repo
 
 import (
 	"context"
-	"github.com/labstack/gommon/log"
-	"gorm.io/gorm"
 	"hkn-be/constants"
 	"hkn-be/models"
+
+	"github.com/labstack/gommon/log"
+	"gorm.io/gorm"
 )
 
 type userRepo struct {

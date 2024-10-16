@@ -1,10 +1,7 @@
 -- +goose Up
 -- +goose StatementBegin
 insert into roles (code, name)
-values ('other', 'Other'),
-       ('local-government-official', 'Local Government Official'),
-       ('aplg-member', 'APLG Member'),
-       ('student', 'Student');
+values ('dealer', 'Dealer');
 -- +goose StatementEnd
 
 -- +goose Down

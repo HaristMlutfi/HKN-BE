@@ -27,8 +27,7 @@ type authService struct {
 
 func (a authService) Register(ctx context.Context, userData objects.User) error {
 	//todo:: temporary set the user tole by default as student, but should be change later if flow is in final version
-	//begin of set default user role as student
-	roleData, err := a.RoleRepo.GetRoleByCode(ctx, "student")
+	roleData, err := a.RoleRepo.GetRoleByCode(ctx, "dealer")
 	if err != nil {
 		return err
 	}

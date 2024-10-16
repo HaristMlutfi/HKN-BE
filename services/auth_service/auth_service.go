@@ -138,7 +138,7 @@ func (a authService) getVerificationCode(ctx context.Context, userData *models.U
 
 	err = a.mail.SendEmail(
 		[]string{userData.Email},
-		"Registration on LMS",
+		"Registration on HKN",
 		emailBody,
 	)
 	if err != nil {

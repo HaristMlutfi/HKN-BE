@@ -2,7 +2,8 @@ package constants
 
 const (
 	ServerBaseUrl         = "BASE_URL"
-	ServerPort            = "SERVER_PORT"
+	ServerBePort          = "SERVER_BE_PORT"
+	ServerFePort          = "SERVER_FE_PORT"
 	ServerWriteTimeout    = "WRITE_TIMEOUT"
 	ServerReadTimeout     = "READ_TIMEOUT"
 	ServerGracefulTimeout = "GRACEFUL_TIMEOUT"

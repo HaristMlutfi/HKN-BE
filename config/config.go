@@ -20,7 +20,8 @@ type Config struct {
 
 type ServerConfig struct {
 	BaseUrl         string
-	Port            string
+	BePort          string
+	FePort          string
 	WriteTimeout    int
 	ReadTimeout     int
 	GracefulTimeout int
@@ -94,7 +95,8 @@ func InitConfig() Config {
 	tmpConfig := Config{
 		Server: ServerConfig{
 			BaseUrl:         os.Getenv(constants.ServerBaseUrl),
-			Port:            os.Getenv(constants.ServerPort),
+			BePort:          os.Getenv(constants.ServerBePort),
+			FePort:          os.Getenv(constants.ServerFePort),
 			WriteTimeout:    10,
 			ReadTimeout:     10,
 			GracefulTimeout: 10,

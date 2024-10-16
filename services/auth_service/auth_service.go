@@ -124,7 +124,7 @@ func (a authService) getVerificationCode(ctx context.Context, userData *models.U
 		return err
 	}
 
-	verificationLink := utils.GenerateVerificationURL(fmt.Sprintf("%s%s/verify-registration", a.server.BaseUrl, a.server.Port), userData.Id, verificationCode)
+	verificationLink := utils.GenerateVerificationURL(fmt.Sprintf("%s%s/verify-registration", a.server.BaseUrl, a.server.FePort), userData.Id, verificationCode)
 	emailData := struct {
 		Username         string
 		VerificationLink string

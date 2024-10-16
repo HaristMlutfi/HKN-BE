@@ -70,7 +70,7 @@ func main() {
 
 	r := router.InitRouter(ctxHandlers, jwtService)
 
-	r.Logger.Fatal(r.Start(cfg.Server.Port))
+	r.Logger.Fatal(r.Start(cfg.Server.BePort))
 }
 
 //go:embed migrations/*.sql

@@ -1,12 +1,13 @@
 package auth_handler
 
 import (
-	"github.com/golang-jwt/jwt/v5"
-	"github.com/labstack/echo/v4"
 	"hkn-be/constants"
 	"hkn-be/infras/jwt_infra"
 	"hkn-be/objects"
 	"hkn-be/services"
+
+	"github.com/golang-jwt/jwt/v5"
+	"github.com/labstack/echo/v4"
 )
 
 type authHandler struct {

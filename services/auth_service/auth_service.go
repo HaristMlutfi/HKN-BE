@@ -4,8 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/redis/go-redis/v9"
-	"gorm.io/gorm"
 	"hkn-be/config"
 	"hkn-be/constants"
 	"hkn-be/infras/jwt_infra"
@@ -15,6 +13,9 @@ import (
 	"hkn-be/repositories"
 	"hkn-be/utils"
 	"time"
+
+	"github.com/redis/go-redis/v9"
+	"gorm.io/gorm"
 )
 
 type authService struct {
@@ -123,7 +124,7 @@ func (a authService) getVerificationCode(ctx context.Context, userData *models.U
 		return err
 	}
 
-	verificationLink := utils.GenerateVerificationURL(fmt.Sprintf("%s%s/verify-registration", a.server.BaseUrl, a.server.FePort), userData.Id, verificationCode)
+	verificationLink := utils.GenerateVerificationURL(fmt.Sprintf("%s:%s/verify-registration", a.server.BaseUrl, a.server.FePort), userData.Id, verificationCode)
 	emailData := struct {
 		Username         string
 		VerificationLink string

@@ -1,10 +1,11 @@
 package repositories
 
 import (
-	"gorm.io/gorm"
 	"hkn-be/repositories/role_repo"
 	"hkn-be/repositories/user_repo"
 	"hkn-be/repositories/user_role_repo"
+
+	"gorm.io/gorm"
 )
 
 type RepositoryCtx struct {

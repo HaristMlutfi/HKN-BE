@@ -1,8 +1,9 @@
 package auth_handler
 
 import (
-	"github.com/labstack/echo/v4"
 	"hkn-be/services"
+
+	"github.com/labstack/echo/v4"
 )
 
 type AuthHandlerInterface interface {
@@ -12,6 +13,7 @@ type AuthHandlerInterface interface {
 	Login(c echo.Context) error
 	Logout(c echo.Context) error
 	RefreshToken(c echo.Context) error
+	DeleteUser(c echo.Context) error
 }
 
 func NewAuthHandler(ctx *services.ServiceCtx) AuthHandlerInterface {

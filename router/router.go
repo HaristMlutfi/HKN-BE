@@ -1,12 +1,13 @@
 package router
 
 import (
+	"hkn-be/handlers"
+	"hkn-be/infras/jwt_infra"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
-	"hkn-be/handlers"
-	"hkn-be/infras/jwt_infra"
 )
 
 // CustomValidator is a custom validator for Echo
@@ -49,6 +50,7 @@ func setAppRoutes(handler *handlers.HandlerCtx, e *echo.Echo, jwtInterface jwt_i
 	e.POST("/verify-registration", handler.AuthHandler.VerifyRegistration)
 	e.POST("/request-verification-code", handler.AuthHandler.RequestVerificationCode)
 	e.POST("/login", handler.AuthHandler.Login)
+	e.DELETE("/delete", handler.AuthHandler.DeleteUser)
 
 	v1 := e.Group("/v1")
 	v1.Use(jwtInterface.GetEchoJwtMiddlewareConfig())

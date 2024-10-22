@@ -109,3 +109,16 @@ func (a authHandler) RefreshToken(c echo.Context) error {
 	//TODO implement me
 	panic("implement me")
 }
+
+func (a authHandler) DeleteUser(c echo.Context) error {
+	// Ambil userId dari URL parameter
+	userIdParam := c.Param("id")
+
+	// Panggil service untuk menghapus user
+	err := a.UserService.DeleteUser(c.Request().Context(), userIdParam)
+	if err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	return objects.SetResponse(c, nil, constants.MessageSuccess)
+}

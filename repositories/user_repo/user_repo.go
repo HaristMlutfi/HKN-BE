@@ -50,3 +50,12 @@ func (u userRepo) GetUserByEmail(ctx context.Context, email string) (*models.Use
 	}
 	return &result, nil
 }
+
+func (u userRepo) DeleteUser(ctx context.Context, userId string) error {
+	tx := u.DB.WithContext(ctx).Unscoped().Delete(&models.User{}, constants.QueryById, userId)
+	if tx.Error != nil {
+		log.Error(tx.Error)
+		return tx.Error
+	}
+	return nil
+}

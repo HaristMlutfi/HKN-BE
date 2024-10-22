@@ -50,7 +50,7 @@ func setAppRoutes(handler *handlers.HandlerCtx, e *echo.Echo, jwtInterface jwt_i
 	e.POST("/verify-registration", handler.AuthHandler.VerifyRegistration)
 	e.POST("/request-verification-code", handler.AuthHandler.RequestVerificationCode)
 	e.POST("/login", handler.AuthHandler.Login)
-	e.DELETE("/delete", handler.AuthHandler.DeleteUser)
+	e.DELETE("/delete/:id", handler.AuthHandler.DeleteUser)
 
 	v1 := e.Group("/v1")
 	v1.Use(jwtInterface.GetEchoJwtMiddlewareConfig())

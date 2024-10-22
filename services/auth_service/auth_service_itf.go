@@ -2,12 +2,13 @@ package auth_service
 
 import (
 	"context"
-	"github.com/redis/go-redis/v9"
 	"hkn-be/config"
 	"hkn-be/infras/jwt_infra"
 	"hkn-be/infras/mail"
 	"hkn-be/objects"
 	"hkn-be/repositories"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type AuthServiceInterface interface {

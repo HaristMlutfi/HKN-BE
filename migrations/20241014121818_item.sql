@@ -1,16 +1,16 @@
 -- +goose Up
 -- +goose StatementBegin
-create table if not exists items
+CREATE TABLE IF NOT EXISTS items
 (
-    id_barang         uuid primary key default uuid_generate_v4(),
-    nama_barang       varchar(50)  not null unique,
-    harga    varchar      not null,
-    kategori  varchar(50) null unique,
-    stock        varchar(100) not null,
+    id_barang         UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nama_barang       VARCHAR(50) NOT NULL UNIQUE,
+    harga             VARCHAR(50) NOT NULL, -- Menetapkan ukuran untuk kolom harga
+    kategori          VARCHAR(50) NULL UNIQUE,
+    stock             VARCHAR(100) NOT NULL -- Menghapus koma yang tidak perlu
 );
 -- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
-drop table if exists items;
+DROP TABLE IF EXISTS items;
 -- +goose StatementEnd

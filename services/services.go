@@ -6,6 +6,7 @@ import (
 	"hkn-be/infras/mail"
 	"hkn-be/repositories"
 	"hkn-be/services/auth_service"
+	"hkn-be/services/item_service"
 	"hkn-be/services/user_service"
 
 	"github.com/redis/go-redis/v9"
@@ -13,7 +14,8 @@ import (
 
 type ServiceCtx struct {
 	AuthService auth_service.AuthServiceInterface
-	UserService user_service.UserService
+	UserService user_service.UserServiceInterface
+	ItemService item_service.ItemServiceInterface
 }
 
 func InitServices(
@@ -26,8 +28,11 @@ func InitServices(
 ) *ServiceCtx {
 	authService := auth_service.NewAuthService(ctxRepo, server, jwtInterface, redis, mail)
 	userService := user_service.NewUserService(ctxRepo.UserRepo)
+	itemService := item_service.NewItemService(ctxRepo.ItemRepo)
+
 	return &ServiceCtx{
 		AuthService: authService,
 		UserService: userService,
+		ItemService: itemService,
 	}
 }

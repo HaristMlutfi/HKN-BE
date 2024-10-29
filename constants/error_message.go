@@ -17,4 +17,5 @@ var (
 	ErrPasswordRequired       = errors.New("password is required")
 	ErrInvalidJwtToken        = errors.New("invalid token")
 	ErrInvalidId              = errors.New("invalid ID")
+	ErrInvalidInput           = errors.New("invalid input")
 )

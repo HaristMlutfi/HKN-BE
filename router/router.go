@@ -46,11 +46,27 @@ func InitRouter(handler *handlers.HandlerCtx, jwtInterface jwt_infra.JwtInterfac
 }
 
 func setAppRoutes(handler *handlers.HandlerCtx, e *echo.Echo, jwtInterface jwt_infra.JwtInterface) {
-	e.POST("/register", handler.AuthHandler.Register)
-	e.POST("/verify-registration", handler.AuthHandler.VerifyRegistration)
-	e.POST("/request-verification-code", handler.AuthHandler.RequestVerificationCode)
-	e.POST("/login", handler.AuthHandler.Login)
-	e.DELETE("/delete/:id", handler.AuthHandler.DeleteUser)
+	//Auth routes
+	authRoutes := e.Group("/auth")
+	authRoutes.POST("/register", handler.AuthHandler.Register)
+	authRoutes.POST("/verify-registration", handler.AuthHandler.VerifyRegistration)
+	authRoutes.POST("/request-verification-code", handler.AuthHandler.RequestVerificationCode)
+	authRoutes.POST("/login", handler.AuthHandler.Login)
+	//User routes
+	userRoutes := e.Group("/user")
+	userRoutes.DELETE("/delete/:id", handler.UserHandler.DeleteUser)
+	userRoutes.POST("/create-user", handler.UserHandler.CreateUser)
+	//userRoutes.PUT("/update-user", handler.UserHandler.UpdateUser)
+	//userRoutes.GET("/get-user/:id", handler.UserHandler.GetUserById)
+	//userRoutes.GET("/get-user-by-email/:email", handler.UserHandler.GetUserByEmail)
+
+	//Item routes
+	itemRoutes := e.Group("/item")
+	//itemRoutes.GET("/list-items", handler.ItemHandler.ListItems)
+	//itemRoutes.GET("/get-item/:id", handler.ItemHandler.GetItemByID)
+	//itemRoutes.PUT("/update-item", handler.ItemHandler.UpdateItem)
+	itemRoutes.POST("/create-item", handler.ItemHandler.CreateItem)
+	itemRoutes.DELETE("/delete-item/:id", handler.ItemHandler.DeleteItem)
 
 	v1 := e.Group("/v1")
 	v1.Use(jwtInterface.GetEchoJwtMiddlewareConfig())

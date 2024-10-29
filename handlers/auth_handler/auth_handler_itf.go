@@ -13,7 +13,6 @@ type AuthHandlerInterface interface {
 	Login(c echo.Context) error
 	Logout(c echo.Context) error
 	RefreshToken(c echo.Context) error
-	DeleteUser(c echo.Context) error
 }
 
 func NewAuthHandler(ctx *services.ServiceCtx) AuthHandlerInterface {

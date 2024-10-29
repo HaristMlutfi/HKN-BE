@@ -110,15 +110,31 @@ func (a authHandler) RefreshToken(c echo.Context) error {
 	panic("implement me")
 }
 
-func (a authHandler) DeleteUser(c echo.Context) error {
-	// Ambil userId dari URL parameter
-	userIdParam := c.Param("id")
+//func (a itemHandler) AddItems(c echo.Context) error {
+//	var request objects.ItemRequest
+//	err := c.Bind(&request)
+//	if err != nil {
+//		return objects.SetResponse(c, err, constants.MessageFailed)
+//	}
 
-	// Panggil service untuk menghapus user
-	err := a.UserService.DeleteUser(c.Request().Context(), userIdParam)
-	if err != nil {
-		return objects.SetResponse(c, err, constants.MessageFailed)
-	}
+// Validasi payload request
+//	err = c.Validate(request)
+//	if err != nil {
+//		return objects.SetResponse(c, err, constants.MessageFailed)
+//	}
 
-	return objects.SetResponse(c, nil, constants.MessageSuccess)
-}
+// Panggil service untuk menambahkan item
+//	_, err = a.ItemService.CreateItem(
+//		c.Request().Context(), objects.ItemRequest{
+//			NamaBarang: request.NamaBarang,
+//			Harga:      request.Harga,
+//			Kategori:   request.Kategori,
+//			Stock:      request.Stock,
+//		},
+//	)
+//	if err != nil {
+//		return objects.SetResponse(c, err, constants.MessageFailed)
+//	}
+
+//	return objects.SetResponse(c, nil, constants.MessageSuccess)
+//}

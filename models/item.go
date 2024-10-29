@@ -1,15 +1,15 @@
 package models
 
-import "time"
+import (
+	"github.com/google/uuid"
+)
 
 type Item struct {
-	ID        uint      `gorm:"primaryKey"`
-	Name      string    `gorm:"type:varchar(100);not null"`
-	Category  string    `gorm:"type:varchar(100);not null"`
-	Price     float64   `gorm:"not null"`
-	Quantity  int       `gorm:"not null"`
-	CreatedAt time.Time `gorm:"autoCreateTime"`
-	UpdatedAt time.Time `gorm:"autoUpdateTime"`
+	IDBarang   uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id_barang"`
+	NamaBarang string    `gorm:"type:varchar(50);unique;not null" json:"nama_barang"`
+	Harga      float64   `gorm:"type:numeric(12,2);not null" json:"harga"`
+	Kategori   string    `gorm:"type:varchar(50)" json:"kategori"`
+	Stock      int       `gorm:"not null" json:"stock"`
 }
 
 func (Item) TableName() string {

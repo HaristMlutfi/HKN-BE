@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"hkn-be/repositories/item_repo"
 	"hkn-be/repositories/role_repo"
 	"hkn-be/repositories/user_repo"
 	"hkn-be/repositories/user_role_repo"
@@ -13,6 +14,7 @@ type RepositoryCtx struct {
 	UserRepo     user_repo.UserRepoInterface
 	UserRoleRepo user_role_repo.UserRoleRepoInterface
 	RoleRepo     role_repo.RoleRepoInterface
+	ItemRepo     item_repo.ItemRepoInterface
 }
 
 func InitRepositories(db *gorm.DB) *RepositoryCtx {

@@ -5,6 +5,8 @@ import (
 	"hkn-be/objects"
 	"hkn-be/services"
 
+	"hkn-be/models"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -26,8 +28,31 @@ func (a userHandler) DeleteUser(c echo.Context) error {
 }
 
 func (a userHandler) CreateUser(c echo.Context) error {
-	//TODO implement me
-	panic("implement me")
+	// Buat objek user request dari body
+	var req objects.User
+	if err := c.Bind(&req); err != nil {
+		return objects.SetResponse(c, constants.ErrInvalidInput, constants.MessageFailed)
+	}
+
+	// Validasi input
+	if err := c.Validate(req); err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	// Panggil service untuk membuat user baru
+	user := models.User{
+		Email:      req.Email,
+		Password:   req.Password,
+		Name:       req.Name,
+		IsVerified: req.IsVerified,
+	}
+
+	err := a.UserService.CreateUser(c.Request().Context(), user)
+	if err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	return objects.SetResponse(c, nil, constants.MessageSuccess)
 }
 
 func (a userHandler) GetItemByID(c echo.Context) error {

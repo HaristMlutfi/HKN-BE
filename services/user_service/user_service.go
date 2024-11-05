@@ -4,6 +4,7 @@ import (
 	"context"
 	"hkn-be/models"
 	"hkn-be/repositories/user_repo"
+	"hkn-be/utils"
 )
 
 type userService struct {
@@ -15,7 +16,17 @@ func (s *userService) DeleteUser(ctx context.Context, id string) error {
 }
 
 func (s *userService) CreateUser(ctx context.Context, user models.User) error {
-	_, err := s.userRepo.CreateUser(ctx, user)
+	// Gunakan fungsi HashPassword dari utils
+	hashedPassword, err := utils.HashPassword(user.Password)
+	if err != nil {
+		return err // Kembalikan error jika hashing gagal
+	}
+
+	// Simpan hashed password ke struct user
+	user.Password = hashedPassword
+
+	// Panggil repository untuk menyimpan user
+	_, err = s.userRepo.CreateUser(ctx, user)
 	return err
 }
 

@@ -5,6 +5,8 @@ import (
 	"hkn-be/objects"
 	"hkn-be/services"
 
+	"fmt"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -28,20 +30,19 @@ func (h itemHandler) DeleteItem(c echo.Context) error {
 
 // Fungsi CreateItem untuk membuat item baru
 func (h itemHandler) CreateItem(c echo.Context) error {
-	var newItem *objects.ItemRequest // Misalnya ada struct ItemRequest di objects
+	fmt.Println("Request received") // Tambahkan log ini
+	var newItem *objects.ItemRequest
 
 	if err := c.Bind(&newItem); err != nil {
 		return objects.SetResponse(c, constants.ErrInvalidInput, constants.MessageFailed)
 	}
 
 	dtoModels := newItem.ToModel()
-
 	item, err := h.ItemService.CreateItem(c.Request().Context(), dtoModels)
 	if err != nil {
 		return objects.SetResponse(c, err, constants.MessageFailed)
 	}
 
 	res := objects.NewItemRes().Map(item)
-
 	return objects.SetResponse(c, nil, res)
 }

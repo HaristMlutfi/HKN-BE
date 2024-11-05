@@ -11,7 +11,6 @@ type userService struct {
 }
 
 func (s *userService) DeleteUser(ctx context.Context, id string) error {
-
 	return s.userRepo.DeleteUser(ctx, id)
 }
 

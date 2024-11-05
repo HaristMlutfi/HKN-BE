@@ -7,6 +7,7 @@ type ItemRequest struct {
 	Harga      float64 `json:"harga" validate:"required"`
 	Kategori   string  `json:"kategori" validate:"omitempty"`
 	Stock      int     `json:"stock" validate:"required"`
+	Discount   int     `json:"discount" validate:"omitempty"`
 }
 
 func NewItemRequest() *ItemRequest {
@@ -19,6 +20,7 @@ func (i *ItemRequest) ToModel() *ItemDto {
 		Harga:      i.Harga,
 		Kategori:   i.Kategori,
 		Stock:      i.Stock,
+		Discount:   i.Discount,
 	}
 }
 
@@ -27,6 +29,7 @@ type ItemDto struct {
 	Harga      float64
 	Kategori   string
 	Stock      int
+	Discount   int
 }
 
 func NewItemDto() *ItemDto {
@@ -39,6 +42,7 @@ func (i *ItemDto) ToModel() *models.Item {
 		Harga:      i.Harga,
 		Kategori:   i.Kategori,
 		Stock:      i.Stock,
+		Discount:   i.Discount,
 	}
 }
 
@@ -48,6 +52,7 @@ func (i *ItemDto) MapFromModel(model *models.Item) *ItemDto {
 		Harga:      i.Harga,
 		Kategori:   i.Kategori,
 		Stock:      i.Stock,
+		Discount:   i.Discount,
 	}
 }
 
@@ -56,6 +61,7 @@ type ItemRes struct {
 	Harga      float64 `json:"harga" validate:"required"`
 	Kategori   string  `json:"kategori" validate:"omitempty"`
 	Stock      int     `json:"stock" validate:"required"`
+	Discount   int     `json:"discount" validate:"omitempty"`
 }
 
 func NewItemRes() ItemRes {

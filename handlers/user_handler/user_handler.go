@@ -30,10 +30,6 @@ func (a userHandler) CreateUser(c echo.Context) error {
 	panic("implement me")
 }
 
-func (a userHandler) UpdateUser(c echo.Context) error {
-	//TODO implement me
-	panic("implement me")
-}
 func (a userHandler) GetItemByID(c echo.Context) error {
 	//TODO implement me
 	panic("implement me")

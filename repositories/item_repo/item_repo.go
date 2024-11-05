@@ -2,6 +2,7 @@ package item_repo
 
 import (
 	"context"
+	"hkn-be/constants"
 	"hkn-be/models"
 
 	"github.com/labstack/gommon/log"
@@ -41,10 +42,11 @@ func (r *itemRepo) UpdateItem(ctx context.Context, item *models.Item) error {
 }
 
 // DeleteItem menghapus item berdasarkan ID-nya
-func (r *itemRepo) DeleteItem(ctx context.Context, id string) error {
-	if err := r.WithContext(ctx).Delete(&models.Item{}, "id_barang = ?", id).Error; err != nil {
-		log.Error("Failed to delete item:", err)
-		return err
+func (u itemRepo) DeleteItem(ctx context.Context, itemId string) error {
+	tx := u.DB.WithContext(ctx).Unscoped().Delete(&models.Item{}, constants.QueryById, itemId)
+	if tx.Error != nil {
+		log.Error(tx.Error)
+		return tx.Error
 	}
 	return nil
 }

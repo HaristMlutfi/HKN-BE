@@ -21,10 +21,12 @@ func InitRepositories(db *gorm.DB) *RepositoryCtx {
 	userRepo := user_repo.NewUserRepo(db)
 	userRoleRepo := user_role_repo.NewUserRoleRepo(db)
 	roleRepo := role_repo.NewRoleRepo(db)
+	itemRepo := item_repo.NewItemRepo(db)
 	return &RepositoryCtx{
 		DB:           db,
 		UserRepo:     userRepo,
 		UserRoleRepo: userRoleRepo,
 		RoleRepo:     roleRepo,
+		ItemRepo:     itemRepo,
 	}
 }

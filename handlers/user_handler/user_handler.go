@@ -55,6 +55,30 @@ func (a userHandler) CreateUser(c echo.Context) error {
 	return objects.SetResponse(c, nil, constants.MessageSuccess)
 }
 
+// file: handlers/user_handler.go
+// file: handlers/user_handler.go
+func (h userHandler) UpdateUser(c echo.Context) error {
+	// Ambil userId dari URL parameter
+	userIdParam := c.Param("id")
+
+	// Ambil request body
+	var req objects.UserRequest
+	if err := c.Bind(&req); err != nil {
+		return objects.SetResponse(c, constants.ErrInvalidInput, constants.MessageFailed)
+	}
+
+	// Konversi dari UserRequest ke UserDTO
+	userDTO := req.ToDTO()
+
+	// Panggil service untuk mengupdate user
+	err := h.UserService.UpdateUser(c.Request().Context(), userIdParam, userDTO.ToModel())
+	if err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	return objects.SetResponse(c, nil, constants.MessageSuccess)
+}
+
 func (a userHandler) GetItemByID(c echo.Context) error {
 	//TODO implement me
 	panic("implement me")

@@ -2,6 +2,7 @@ package user_repo
 
 import (
 	"context"
+
 	"hkn-be/constants"
 	"hkn-be/models"
 
@@ -24,9 +25,9 @@ func (u userRepo) GetUserById(ctx context.Context, userId string) (*models.User,
 }
 
 func (u userRepo) UpdateUser(ctx context.Context, user models.User) error {
-	tx := u.DB.WithContext(ctx).Table(models.TableNameUser).Updates(&user)
+	tx := u.DB.WithContext(ctx).Model(&models.User{}).Where("id = ?", user.Id).Updates(&user)
 	if tx.Error != nil {
-		log.Error(tx.Error)
+		log.Error("Failed to update user:", tx.Error)
 		return tx.Error
 	}
 	return nil

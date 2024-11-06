@@ -56,7 +56,7 @@ func setAppRoutes(handler *handlers.HandlerCtx, e *echo.Echo, jwtInterface jwt_i
 	userRoutes := e.Group("/user")
 	userRoutes.DELETE("/delete/:id", handler.UserHandler.DeleteUser)
 	userRoutes.POST("/create-user", handler.UserHandler.CreateUser)
-	//userRoutes.PUT("/update-user", handler.UserHandler.UpdateUser)
+	userRoutes.PUT("/update-user/:id", handler.UserHandler.UpdateUser)
 	//userRoutes.GET("/get-user/:id", handler.UserHandler.GetUserById)
 	//userRoutes.GET("/get-user-by-email/:email", handler.UserHandler.GetUserByEmail)
 

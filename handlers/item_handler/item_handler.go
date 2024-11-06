@@ -46,3 +46,26 @@ func (h itemHandler) CreateItem(c echo.Context) error {
 	res := objects.NewItemRes().Map(item)
 	return objects.SetResponse(c, nil, res)
 }
+
+func (h itemHandler) UpdateItem(c echo.Context) error {
+	// Ambil itemId dari URL parameter
+	itemIdParam := c.Param("id")
+
+	// Ambil request body dan bind ke ItemRequest
+	var req objects.ItemRequest
+	if err := c.Bind(&req); err != nil {
+		return objects.SetResponse(c, constants.ErrInvalidInput, constants.MessageFailed)
+	}
+
+	// Konversi ItemRequest ke models.Item
+	itemToUpdate := req.TooModel()
+	itemToUpdate.Id = itemIdParam // Assign ID yang diterima dari URL parameter
+
+	// Panggil service untuk update item
+	err := h.ItemService.UpdateItem(c.Request().Context(), itemToUpdate)
+	if err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	return objects.SetResponse(c, nil, constants.MessageSuccess)
+}

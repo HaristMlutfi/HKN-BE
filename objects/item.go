@@ -23,6 +23,15 @@ func (i *ItemRequest) ToModel() *ItemDto {
 		Discount:   i.Discount,
 	}
 }
+func (i *ItemRequest) TooModel() *models.Item {
+	return &models.Item{
+		NamaBarang: i.NamaBarang,
+		Harga:      i.Harga,
+		Kategori:   i.Kategori,
+		Stock:      i.Stock,
+		Discount:   i.Discount,
+	}
+}
 
 type ItemDto struct {
 	NamaBarang string

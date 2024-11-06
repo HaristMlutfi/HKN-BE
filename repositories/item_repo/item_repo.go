@@ -5,6 +5,8 @@ import (
 	"hkn-be/constants"
 	"hkn-be/models"
 
+	"fmt"
+
 	"github.com/labstack/gommon/log"
 	"gorm.io/gorm"
 )
@@ -34,10 +36,21 @@ func (r *itemRepo) GetItemByID(ctx context.Context, id string) (*models.Item, er
 
 // UpdateItem memperbarui item yang sudah ada
 func (r *itemRepo) UpdateItem(ctx context.Context, item *models.Item) error {
+	// Cek apakah item dengan ID tersebut ada di database
+	var existingItem models.Item
+	if err := r.WithContext(ctx).Where("id = ?", item.Id).First(&existingItem).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return fmt.Errorf("item dengan ID %s tidak ditemukan", item.Id)
+		}
+		return err // Jika ada error lain dalam query
+	}
+
+	// Jika item ada, lakukan update
 	if err := r.WithContext(ctx).Save(item).Error; err != nil {
 		log.Error("Failed to update item:", err)
 		return err
 	}
+
 	return nil
 }
 

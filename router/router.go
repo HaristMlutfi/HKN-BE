@@ -62,7 +62,7 @@ func setAppRoutes(handler *handlers.HandlerCtx, e *echo.Echo, jwtInterface jwt_i
 
 	//Item routes
 	itemRoutes := e.Group("/item")
-	//itemRoutes.GET("/list-items", handler.ItemHandler.ListItems)
+	itemRoutes.GET("/list-items", handler.ItemHandler.ListItems)
 	//itemRoutes.GET("/get-item/:id", handler.ItemHandler.GetItemByID)
 	itemRoutes.PUT("/update-item/:id", handler.ItemHandler.UpdateItem)
 	itemRoutes.POST("/create-item", handler.ItemHandler.CreateItem)

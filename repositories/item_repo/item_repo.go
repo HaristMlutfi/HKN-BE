@@ -67,8 +67,9 @@ func (u itemRepo) DeleteItem(ctx context.Context, itemId string) error {
 // ListItems mengambil semua item dari database
 func (r *itemRepo) ListItems(ctx context.Context) ([]models.Item, error) {
 	var items []models.Item
-	if err := r.WithContext(ctx).Find(&items).Error; err != nil {
-		log.Error("Failed to list items:", err)
+	// Query untuk mendapatkan semua item dari database
+	if err := r.DB.WithContext(ctx).Find(&items).Error; err != nil {
+		log.Error("Failed to retrieve items:", err)
 		return nil, err
 	}
 	return items, nil

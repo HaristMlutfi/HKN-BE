@@ -69,3 +69,27 @@ func (h itemHandler) UpdateItem(c echo.Context) error {
 
 	return objects.SetResponse(c, nil, constants.MessageSuccess)
 }
+
+func (h *itemHandler) ListItems(c echo.Context) error {
+	// Panggil fungsi di service untuk mendapatkan daftar item
+	items, err := h.ItemService.ListItems(c.Request().Context())
+	if err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	// Konversi items ke response format yang sesuai
+	var itemResponses []objects.ItemRes
+	for _, item := range items {
+		itemResponse := objects.NewItemRes().Map(&objects.ItemDto{
+			NamaBarang: item.NamaBarang,
+			Harga:      item.Harga,
+			Kategori:   item.Kategori,
+			Stock:      item.Stock,
+			Discount:   item.Discount,
+		})
+		itemResponses = append(itemResponses, itemResponse)
+	}
+
+	// Kirimkan itemResponses sebagai response sukses
+	return objects.SetResponse(c, nil, itemResponses)
+}

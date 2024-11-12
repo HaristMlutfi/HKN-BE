@@ -10,6 +10,7 @@ type ItemHandlerInterface interface {
 	CreateItem(c echo.Context) error
 	DeleteItem(c echo.Context) error
 	UpdateItem(c echo.Context) error
+	ListItems(c echo.Context) error
 }
 
 // NewItemHandler menginisialisasi ItemHandler dengan ServiceCtx

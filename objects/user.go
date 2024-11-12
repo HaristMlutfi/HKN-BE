@@ -50,3 +50,23 @@ func (u *UserDTO) MapFromModel(model *models.User) *UserDTO {
 		Name:     model.Name,
 	}
 }
+
+type UserRes struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+	//Role     string `json:"role"`
+	// Tambahkan field lain sesuai kebutuhan
+}
+
+func NewUserRes() UserRes {
+	return UserRes{}
+}
+
+func (u UserRes) Map(model *models.User) UserRes {
+	return UserRes{
+		Name:  model.Name,
+		Email: model.Email,
+		//Role:  model.Role,
+		// Mapping field lain sesuai kebutuhan
+	}
+}

@@ -57,13 +57,12 @@ func setAppRoutes(handler *handlers.HandlerCtx, e *echo.Echo, jwtInterface jwt_i
 	userRoutes.DELETE("/delete/:id", handler.UserHandler.DeleteUser)
 	userRoutes.POST("/create-user", handler.UserHandler.CreateUser)
 	userRoutes.PUT("/update-user/:id", handler.UserHandler.UpdateUser)
-	//userRoutes.GET("/get-user/:id", handler.UserHandler.GetUserById)
+	userRoutes.GET("/get-user/:id", handler.UserHandler.GetUserById)
 	//userRoutes.GET("/get-user-by-email/:email", handler.UserHandler.GetUserByEmail)
 
 	//Item routes
 	itemRoutes := e.Group("/item")
 	itemRoutes.GET("/list-items", handler.ItemHandler.ListItems)
-	//itemRoutes.GET("/get-item/:id", handler.ItemHandler.GetItemByID)
 	itemRoutes.PUT("/update-item/:id", handler.ItemHandler.UpdateItem)
 	itemRoutes.POST("/create-item", handler.ItemHandler.CreateItem)
 	itemRoutes.DELETE("/delete-item/:id", handler.ItemHandler.DeleteItem)

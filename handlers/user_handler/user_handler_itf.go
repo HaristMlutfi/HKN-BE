@@ -10,6 +10,7 @@ type UserHandlerInterface interface {
 	DeleteUser(c echo.Context) error
 	CreateUser(c echo.Context) error
 	UpdateUser(c echo.Context) error
+	GetUserById(c echo.Context) error
 }
 
 func NewUserHandler(ctx *services.ServiceCtx) UserHandlerInterface {

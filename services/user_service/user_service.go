@@ -56,6 +56,7 @@ func (s *userService) UpdateUser(ctx context.Context, userId string, user *model
 	return s.userRepo.UpdateUser(ctx, *existingUser)
 }
 
+// userService.go
 func (s *userService) GetUserById(ctx context.Context, userId string) (*models.User, error) {
 	return s.userRepo.GetUserById(ctx, userId)
 }

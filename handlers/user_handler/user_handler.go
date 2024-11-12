@@ -55,8 +55,6 @@ func (a userHandler) CreateUser(c echo.Context) error {
 	return objects.SetResponse(c, nil, constants.MessageSuccess)
 }
 
-// file: handlers/user_handler.go
-// file: handlers/user_handler.go
 func (h userHandler) UpdateUser(c echo.Context) error {
 	// Ambil userId dari URL parameter
 	userIdParam := c.Param("id")
@@ -79,10 +77,23 @@ func (h userHandler) UpdateUser(c echo.Context) error {
 	return objects.SetResponse(c, nil, constants.MessageSuccess)
 }
 
-func (a userHandler) GetItemByID(c echo.Context) error {
-	//TODO implement me
-	panic("implement me")
+func (h *userHandler) GetUserById(c echo.Context) error {
+	// Ambil userId dari parameter URL
+	userId := c.Param("id")
+
+	// Panggil service untuk mendapatkan data user berdasarkan userId
+	user, err := h.UserService.GetUserById(c.Request().Context(), userId)
+	if err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	// Konversi data user ke response jika menggunakan DTO atau struct respons tertentu
+	userResponse := objects.NewUserRes().Map(user)
+
+	// Kembalikan respons dengan data userResponse
+	return objects.SetResponse(c, nil, userResponse)
 }
+
 func (a userHandler) GetUserByEmail(c echo.Context) error {
 	//TODO implement me
 	panic("implement me")

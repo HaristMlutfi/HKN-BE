@@ -14,16 +14,6 @@ type userRepo struct {
 	*gorm.DB
 }
 
-func (u userRepo) GetUserById(ctx context.Context, userId string) (*models.User, error) {
-	var result models.User
-	tx := u.DB.WithContext(ctx).Table(models.TableNameUser).First(&result, constants.QueryById, userId)
-	if tx.Error != nil {
-		log.Error(tx.Error)
-		return nil, tx.Error
-	}
-	return &result, nil
-}
-
 func (u userRepo) UpdateUser(ctx context.Context, user models.User) error {
 	tx := u.DB.WithContext(ctx).Model(&models.User{}).Where("id = ?", user.Id).Updates(&user)
 	if tx.Error != nil {
@@ -59,4 +49,15 @@ func (u userRepo) DeleteUser(ctx context.Context, userId string) error {
 		return tx.Error
 	}
 	return nil
+}
+
+// userRepo.go
+func (u userRepo) GetUserById(ctx context.Context, userId string) (*models.User, error) {
+	var user models.User
+	err := u.DB.WithContext(ctx).Where("id = ?", userId).First(&user).Error
+	if err != nil {
+		log.Error("User not found:", err)
+		return nil, err
+	}
+	return &user, nil
 }

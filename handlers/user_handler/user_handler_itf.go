@@ -11,6 +11,7 @@ type UserHandlerInterface interface {
 	CreateUser(c echo.Context) error
 	UpdateUser(c echo.Context) error
 	GetUserById(c echo.Context) error
+	GetUserByEmail(c echo.Context) error
 }
 
 func NewUserHandler(ctx *services.ServiceCtx) UserHandlerInterface {

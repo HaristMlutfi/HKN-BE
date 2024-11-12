@@ -95,6 +95,19 @@ func (h *userHandler) GetUserById(c echo.Context) error {
 }
 
 func (a userHandler) GetUserByEmail(c echo.Context) error {
-	//TODO implement me
-	panic("implement me")
+
+	// Ambil email dari parameter URL
+	email := c.Param("email")
+
+	// Panggil service untuk mendapatkan data user berdasarkan email
+	user, err := a.UserService.GetUserByEmail(c.Request().Context(), email)
+	if err != nil {
+		return objects.SetResponse(c, err, constants.MessageFailed)
+	}
+
+	// Konversi data user ke response jika menggunakan DTO atau struct respons tertentu
+	userResponse := objects.NewUserRes().Map(user)
+
+	// Kembalikan respons dengan data userResponse
+	return objects.SetResponse(c, nil, userResponse)
 }

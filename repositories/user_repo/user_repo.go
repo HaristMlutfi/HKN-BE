@@ -32,16 +32,6 @@ func (u userRepo) CreateUser(ctx context.Context, user models.User) (*models.Use
 	return &user, nil
 }
 
-func (u userRepo) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
-	var result models.User
-	tx := u.DB.WithContext(ctx).First(&result, constants.QueryEmail, email)
-	if tx.Error != nil {
-		log.Error(tx.Error)
-		return nil, tx.Error
-	}
-	return &result, nil
-}
-
 func (u userRepo) DeleteUser(ctx context.Context, userId string) error {
 	tx := u.DB.WithContext(ctx).Unscoped().Delete(&models.User{}, constants.QueryById, userId)
 	if tx.Error != nil {
@@ -55,6 +45,16 @@ func (u userRepo) DeleteUser(ctx context.Context, userId string) error {
 func (u userRepo) GetUserById(ctx context.Context, userId string) (*models.User, error) {
 	var user models.User
 	err := u.DB.WithContext(ctx).Where("id = ?", userId).First(&user).Error
+	if err != nil {
+		log.Error("User not found:", err)
+		return nil, err
+	}
+	return &user, nil
+}
+
+func (u userRepo) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
+	var user models.User
+	err := u.DB.WithContext(ctx).Where("email = ?", email).First(&user).Error
 	if err != nil {
 		log.Error("User not found:", err)
 		return nil, err
